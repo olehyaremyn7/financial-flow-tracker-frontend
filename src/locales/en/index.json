@@ -1,0 +1,8 @@
+{
+  "specs": {
+    "context": "Translation for tests"
+  },
+  "main": {
+    "hello": "Hello world"
+  }
+}

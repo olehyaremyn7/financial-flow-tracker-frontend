@@ -1,0 +1,27 @@
+{
+  "plugins": ["stylelint-scss", "stylelint-order"],
+  "extends": ["stylelint-config-standard", "stylelint-config-standard-scss"],
+  "rules": {
+    "at-rule-no-unknown": null,
+    "scss/at-rule-no-unknown": [
+      true,
+      {
+        "ignoreAtRules": ["tailwind", "variants", "responsive", "apply", "screen"]
+      }
+    ],
+    "declaration-block-trailing-semicolon": null,
+    "no-descending-specificity": null,
+    "order/order": [
+      {
+        "type": "at-rule",
+        "name": "apply"
+      },
+      "declarations",
+      {
+        "type": "at-rule",
+        "name": "screen",
+        "hasBlock": true
+      }
+    ]
+  }
+}

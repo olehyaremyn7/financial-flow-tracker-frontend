@@ -1,0 +1,6 @@
+.root {
+  height: $vh;
+  width: $vw;
+
+  @include flex-center;
+}

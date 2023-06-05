@@ -1,0 +1,161 @@
+name: Verify PR CI
+
+on:
+  push:
+    branches: [master, dev]
+  pull_request:
+    branches: [master, dev]
+    types: [opened, reopened, synchronize]
+
+jobs:
+
+  code_quality:
+    name: 'Check the quality of the code by running the code lint (ESLint), code formatter (Prettier) and styles lint (Stylelint)'
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
+
+      - name: Update npm package manager
+        run: npm install -g npm@latest
+
+      - name: Install Yarn package manager
+        run: npm install -g yarn@latest
+
+      - name: Get yarn cache directory
+        id: yarn-cache-dir
+        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+
+      - name: Setup yarn cache
+        uses: actions/cache@v3
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Cache dependencies (node_modules)
+        uses: actions/cache@v3
+        id: node_modules_cache
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install application dependencies
+        run: yarn install --frozen-lockfile --ignore-scripts --prefer-offline
+
+      - name: Check types (run typecheck)
+        run: yarn typecheck
+
+      - name: Check the quality of the code (run code linter)
+        run: yarn lint --quiet
+
+      - name: Check the quality of the code (run code formatter)
+        run: yarn format:check
+
+      - name: Check the quality of the code (styles) (run styles lint)
+        run: yarn styles --quiet
+
+  unit_testing:
+    name: 'Check the passage of unit tests'
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
+
+      - name: Update npm package manager
+        run: npm install -g npm@latest
+
+      - name: Install Yarn package manager
+        run: npm install -g yarn@latest
+
+      - name: Get yarn cache directory
+        id: yarn-cache-dir
+        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+
+      - name: Setup yarn cache
+        uses: actions/cache@v3
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Cache dependencies (node_modules)
+        uses: actions/cache@v3
+        id: node_modules_cache
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install application dependencies
+        run: yarn install --frozen-lockfile --ignore-scripts --prefer-offline
+
+      - name: Check the passage of unit tests (run unit tests)
+        run: yarn test:hook
+
+  e2e_testing:
+    name: 'Check the passage of e2e tests'
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
+
+      - name: Update npm package manager
+        run: npm install -g npm@latest
+
+      - name: Install Yarn package manager
+        run: npm install -g yarn@latest
+
+      - name: Install application dependencies
+        run: yarn install
+
+      - name: Build application
+        run: yarn build
+
+      - name: Check the passage of e2e tests (run e2e tests with Cypress)
+        run: yarn e2e:hook

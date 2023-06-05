@@ -1,0 +1,175 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer base {
+  :root {
+    // common
+    --color-common-white: rgb(255 255 255);
+    --color-common-black: rgb(0 0 0);
+
+    // neutral
+    --color-neutral-grey-50: rgb(250 250 250);
+    --color-neutral-grey-100: rgb(245 245 245);
+    --color-neutral-grey-200: rgb(238 238 238);
+    --color-neutral-grey-300: rgb(224 224 224);
+    --color-neutral-grey-400: rgb(189 189 189);
+    --color-neutral-grey-500: rgb(158 158 158);
+    --color-neutral-grey-600: rgb(117 117 117);
+    --color-neutral-grey-700: rgb(97 97 97);
+    --color-neutral-grey-800: rgb(66 66 66);
+    --color-neutral-grey-900: rgb(33 33 33);
+
+    // light mode
+    &[data-mode='light'] {
+      // Midnight Mint theme
+      &[data-theme='Midnight Mint'] {
+        // primary (Oxford Blue)
+        --color-primary-light: rgb(77 105 136);
+        --color-primary-lighter: rgb(26 62 102);
+        --color-primary: rgb(0 40 85);
+        --color-primary-darker: rgb(0 36 77);
+        --color-primary-deepest: rgb(0 28 59);
+
+        // secondary (Celadon)
+        --color-secondary-light: rgb(192 241 215);
+        --color-secondary-lighter: rgb(171 237 201);
+        --color-secondary: rgb(150 232 188);
+        --color-secondary-darker: rgb(120 186 150);
+        --color-secondary-deepest: rgb(90 139 113);
+
+        // negative (Red Pantone)
+        --color-negative-light: rgb(245 123 138);
+        --color-negative-lighter: rgb(242 79 99);
+        --color-negative: rgb(239 35 60);
+        --color-negative-darker: rgb(191 28 48);
+        --color-negative-deepest: rgb(143 21 36);
+
+        // success (Kelly green)
+        --color-success-light: rgb(158 240 26);
+        --color-success-lighter: rgb(112 224 0);
+        --color-success: rgb(56 176 0);
+        --color-success-darker: rgb(0 114 0);
+        --color-success-deepest: rgb(0 75 35);
+
+        // warning (Aureolin)
+        --color-warning-light: rgb(255 245 132);
+        --color-warning-lighter: rgb(255 241 91);
+        --color-warning: rgb(255 238 50);
+        --color-warning-darker: rgb(230 214 45);
+        --color-warning-deepest: rgb(251 192 45);
+
+        // info (Picton Blue)
+        --color-info-light: rgb(129 212 250);
+        --color-info-lighter: rgb(79 195 247);
+        --color-info: rgb(3 169 244);
+        --color-info-darker: rgb(2 136 209);
+        --color-info-deepest: rgb(1 87 155);
+
+        // background
+        --color-background-default: rgb(244 244 248);
+        --color-background-surface: rgb(255 255 255);
+        --color-background-overlay: rgb(255 255 255);
+
+        // text
+        --color-text-primary: rgb(52 50 57);
+        --color-text-secondary: rgb(60 60 67 / 75%);
+        --color-text-disabled: rgb(164 163 166);
+
+        // divider
+        --color-divider-black: rgb(60 60 67 / 12%);
+        --color-divider-white: rgb(189 189 189);
+
+        // action/primary
+        --color-action-primary-active: rgb(0 20 43); // 50%
+        --color-action-primary-hover: rgb(77 105 136); // 30%
+        --color-action-primary-selected: rgb(120 186 150); // 20%
+        --color-action-primary-focus: rgb(128 148 170); // 50%
+        --color-action-disabled: rgb(111 111 111);
+        --color-action-disabled-background: rgb(223 224 223);
+
+        // action/secondary
+        --color-action-secondary-active: rgb(75 116 94);
+        --color-action-secondary-hover: rgb(182 239 208);
+        --color-action-secondary-selected: rgb(0 32 68);
+        --color-action-secondary-focus: rgb(203 244 222);
+      }
+    }
+
+    // dark mode
+    &[data-mode='dark'] {
+      // Lavender Horizon theme
+      &[data-theme='Lavender Horizon'] {
+        // primary (French violet)
+        --color-primary-light: rgb(166 125 225);
+        --color-primary-lighter: rgb(136 81 215);
+        --color-primary: rgb(106 38 205);
+        --color-primary-darker: rgb(85 30 164);
+        --color-primary-deepest: rgb(64 23 123);
+
+        // secondary (Deep Sky Blue)
+        --color-secondary-light: rgb(135 213 247);
+        --color-secondary-lighter: rgb(95 199 244);
+        --color-secondary: rgb(55 185 241);
+        --color-secondary-darker: rgb(44 148 193);
+        --color-secondary-deepest: rgb(33 111 145);
+
+        // negative (Red Pantone)
+        --color-negative-light: rgb(245 123 138);
+        --color-negative-lighter: rgb(242 79 99);
+        --color-negative: rgb(239 35 60);
+        --color-negative-darker: rgb(191 28 48);
+        --color-negative-deepest: rgb(143 21 36);
+
+        // success (Pigment green)
+        --color-success-light: rgb(165 214 167);
+        --color-success-lighter: rgb(129 199 132);
+        --color-success: rgb(76 175 80);
+        --color-success-darker: rgb(56 142 60);
+        --color-success-deepest: rgb(27 94 32);
+
+        // warning (Mikado yellow)
+        --color-warning-light: rgb(255 219 102);
+        --color-warning-lighter: rgb(255 207 51);
+        --color-warning: rgb(255 195 0);
+        --color-warning-darker: rgb(230 176 0);
+        --color-warning-deepest: rgb(204 156 0);
+
+        // info (Non Photo blue)
+        --color-info-light: rgb(166 230 242);
+        --color-info-lighter: rgb(173 232 244);
+        --color-info: rgb(144 224 239);
+        --color-info-darker: rgb(72 202 228);
+        --color-info-deepest: rgb(58 162 182);
+
+        // background
+        --color-background-default: rgb(37 37 37);
+        --color-background-surface: rgb(28 28 28);
+        --color-background-overlay: rgb(18 18 18);
+
+        // text
+        --color-text-primary: rgb(255 255 245 / 86%);
+        --color-text-secondary: rgb(235 235 245 / 60%);
+        --color-text-disabled: rgb(235 235 245 / 30%);
+
+        // divider
+        --color-divider-black: rgb(255 255 255 / 12%);
+        --color-divider-white: rgb(255 255 255 / 86%);
+
+        // action/primary
+        --color-action-primary-active: rgb(53 19 103);
+        --color-action-primary-hover: rgb(151 103 220);
+        --color-action-primary-selected: rgb(44 148 193);
+        --color-action-primary-focus: rgb(181 147 230);
+        --color-action-disabled: rgb(111 111 111);
+        --color-action-disabled-background: rgb(223 224 223);
+
+        // action/secondary
+        --color-action-secondary-active: rgb(28 93 121);
+        --color-action-secondary-hover: rgb(115 206 245);
+        --color-action-secondary-selected: rgb(85 30 164);
+        --color-action-secondary-focus: rgb(128 145 255);
+      }
+    }
+  }
+}

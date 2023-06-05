@@ -1,0 +1,7 @@
+@import 'tailwind';
+@import 'utilities/variables';
+@import 'utilities/mixins';
+
+body {
+  transition: all 0.3s;
+}
